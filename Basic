@@ -97,16 +97,56 @@ SELECT * FROM Customers ORDER BY Country;
 The following SQL statement selects all customers from the "Customers" table, sorted DESCENDING by the "Country" column:
 SELECT * FROM Customers ORDER BY Country DESC;
 
-ORDER BY Several Columns Example
 The following SQL statement selects all customers from the "Customers" table, sorted by the "Country" and the "CustomerName" column. This means that it orders by Country, but if some rows have the same Country, it orders them by CustomerName:
 SELECT * FROM Customers ORDER BY Country, CustomerName;
 
+The following SQL statement selects all customers from the "Customers" table, sorted ascending by the "Country" and descending by the "CustomerName" column:
+SELECT * FROM Customers ORDER BY Country ASC, CustomerName DESC;
 
+The following SQL statement inserts a new record in the "Customers" table:
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country) VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
 
+The following SQL statement will insert a new record, but only insert data in the "CustomerName", "City", and "Country" columns (CustomerID will be updated automatically):
+INSERT INTO Customers (CustomerName, City, Country)
+VALUES (Jihye, Baltimore, North Korea);
 
+The IS NULL operator is used to test for empty values (NULL values).
+The following SQL lists all customers with a NULL value in the "Address" field:
+SELECT CustomerName, ContactName, Address FROM Customers WHERE Address IS NULL;
 
+The IS NOT NULL operator is used to test for non-empty values (NOT NULL values).
+The following SQL lists all customers with a value in the "Address" field:
+SELECT CustomerName, ContactName, Address FROM Customers WHERE Address IS NOT NULL;
 
+The UPDATE statement is used to modify the existing records in a table.
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
 
+The following SQL statement updates the first customer (CustomerID = 1) with a new contact person and a new city.
+UPDATE Customers SET ContactName = 'Saepo', City = 'Baltimore'
+WHERE CustomerID = 1;
+
+It is the WHERE clause that determines how many records will be updated.
+The following SQL statement will update the ContactName to "Juan" for all records where country is "Mexico":
+UPDATE Customers SET ContactName = 'Juan'
+WHERE Country = 'Mexico';
+
+Be careful when updating records. If you omit the WHERE clause, ALL records will be updated!
+In the circumstance that you enter
+UPDATE Customers SET ContactName='Juan'; --> All records for the column ContactName will change with 'Juan'
+
+The DELETE statement is used to delete existing records in a table.
+DELETE FROM table_name WHERE condition;
+
+The following SQL statement deletes the customer "Alfreds Futterkiste" from the "Customers" table:
+DELETE From Customers WHERE CustomerName = 'Alfreds Futterkiste';
+
+It is possible to delete all rows in a table without deleting the table. This means that the table structure, attributes, and indexes will be intact:
+DELETE FROM table_name;
+
+The following SQL statement deletes all rows in the "Customers" table, without deleting the table:
+DELETE FROM Customers;
 
 
 
